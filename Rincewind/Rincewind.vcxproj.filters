@@ -16,11 +16,11 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{982e81e4-3a31-4145-8ffc-133a03d677e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Vertex">
-      <UniqueIdentifier>{8a81a7f1-5363-42ad-96f4-0520bc20017b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders\Fragment">
       <UniqueIdentifier>{0d01e147-133d-4d63-ba93-7d786d92adf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Vertex">
+      <UniqueIdentifier>{8a81a7f1-5363-42ad-96f4-0520bc20017b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +28,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
