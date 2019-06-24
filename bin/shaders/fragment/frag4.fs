@@ -12,5 +12,13 @@ uniform vec3 lightColor;
 
 void main()
 {
-    FragColor = vec4(lightColor,1.0) * mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
+	float ambientStrength = 0.1;
+    vec3 ambient = ambientStrength * lightColor;
+
+	vec4 textureColour = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
+
+    vec4 result = vec4(ambient,1.0) * textureColour;
+
+    FragColor = result;
+
 }
