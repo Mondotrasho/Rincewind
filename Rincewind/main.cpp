@@ -246,16 +246,7 @@ int main() {
 		lightingShader.setFloat("pointLights[2].constant", 1.0f);
 		lightingShader.setFloat("pointLights[2].linear", 0.09);
 		lightingShader.setFloat("pointLights[2].quadratic", 0.032);
-		// point light 4
-		lightingShader.setVec3("pointLights[3].position", pointLightPositions[3]);
-		lightingShader.setVec3("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
-		lightingShader.setVec3("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
-		lightingShader.setVec3("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
-		lightingShader.setFloat("pointLights[3].constant", 1.0f);
-		lightingShader.setFloat("pointLights[3].linear", 0.09);
-		lightingShader.setFloat("pointLights[3].quadratic", 0.032);
-
-		// controllable point
+		// controllable point light 4
 		lightingShader.setVec3("pointLights[3].position", lightPos);
 		lightingShader.setVec3("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
 		lightingShader.setVec3("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
