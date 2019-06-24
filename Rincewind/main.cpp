@@ -254,6 +254,16 @@ int main() {
 		lightingShader.setFloat("pointLights[3].constant", 1.0f);
 		lightingShader.setFloat("pointLights[3].linear", 0.09);
 		lightingShader.setFloat("pointLights[3].quadratic", 0.032);
+
+		// controllable point
+		lightingShader.setVec3("pointLights[3].position", lightPos);
+		lightingShader.setVec3("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
+		lightingShader.setVec3("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
+		lightingShader.setVec3("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
+		lightingShader.setFloat("pointLights[3].constant", 1.0f);
+		lightingShader.setFloat("pointLights[3].linear", 0.09);
+		lightingShader.setFloat("pointLights[3].quadratic", 0.032);
+
 		// spotLight
 		lightingShader.setVec3("spotLight.position", cameraPos);
 		lightingShader.setVec3("spotLight.direction", cameraFront);
@@ -289,12 +299,12 @@ int main() {
 
 		// render containers
 		glBindVertexArray(cubeVAO);
-		for (unsigned int i = 0; i < 1; i++)
+		for (unsigned int i = 0; i < 10; i++)
 		{
 			// calculate the model matrix for each object and pass it to shader before drawing
 			glm::mat4 model = glm::mat4(1.0f);
 			model = glm::translate(model, cubePositions[i]);
-			float angle = 0;// 20.0f * i;
+			float angle =  20.0f * i;
 			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 			lightingShader.setMat4("model", model);
 
