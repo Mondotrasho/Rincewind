@@ -39,6 +39,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\bin\shaders\fragment\lamp_frag4.fs">
+      <Filter>Shaders\Fragment</Filter>
+    </None>
+    <None Include="..\bin\shaders\vertex\lamp_vert3.vs">
+      <Filter>Shaders\Vertex</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaders.h">
