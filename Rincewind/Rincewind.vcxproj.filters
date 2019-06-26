@@ -22,6 +22,9 @@
     <Filter Include="Shaders\Vertex">
       <UniqueIdentifier>{8a81a7f1-5363-42ad-96f4-0520bc20017b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assimp">
+      <UniqueIdentifier>{4db1075e-c6a0-4c55-a763-c3c88768bf26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -45,6 +48,27 @@
     <None Include="..\bin\shaders\vertex\lamp_vert3.vs">
       <Filter>Shaders\Vertex</Filter>
     </None>
+    <None Include="..\OpenGL\libraries\Assimp\include\assimp\color4.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="..\OpenGL\libraries\Assimp\include\assimp\material.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="..\OpenGL\libraries\Assimp\include\assimp\matrix3x3.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="..\OpenGL\libraries\Assimp\include\assimp\matrix4x4.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="..\OpenGL\libraries\Assimp\include\assimp\quaternion.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="..\OpenGL\libraries\Assimp\include\assimp\vector2.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="..\OpenGL\libraries\Assimp\include\assimp\vector3.inl">
+      <Filter>assimp</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaders.h">
@@ -64,6 +88,114 @@
     </ClInclude>
     <ClInclude Include="InputStarter.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\ai_assert.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\anim.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\camera.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\cexport.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\cfileio.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\cimport.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\color4.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\DefaultIOStream.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\DefaultIOSystem.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\DefaultLogger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\Defines.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\defs.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\Exporter.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\Importer.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\importerdesc.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\IOStream.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\IOSystem.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\light.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\Logger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\LogStream.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\material.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\matrix3x3.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\matrix4x4.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\mesh.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\metadata.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\NullLogger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\postprocess.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\ProgressHandler.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\quaternion.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\scene.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\SceneCombiner.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\texture.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\types.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\vector2.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\vector3.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\OpenGL\libraries\Assimp\include\assimp\version.h">
+      <Filter>assimp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
