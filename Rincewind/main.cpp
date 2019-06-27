@@ -89,7 +89,7 @@ int main() {
 
 	// load models
 	// -----------
-	Model ourModel("../bin/models/scene.fbx");
+	Model ourModel("../bin/models/Handgun_obj.obj");
 	Shader ourShader("../bin/shaders/vertex/vertModel.vs", "../bin/shaders/fragment/fragModel.fs");
 	// shader configuration
 	// --------------------
