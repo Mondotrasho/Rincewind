@@ -258,6 +258,12 @@ private:
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 					stbi_image_free(image_data);
+
+					Texture textureyboi;
+					textureyboi.id = textureID;
+					textureyboi.type = typeName;
+					textures.push_back(textureyboi);
+					textures_loaded.push_back(textureyboi);
 				}
 			}
 			else 
