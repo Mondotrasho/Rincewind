@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)OpenGL\libraries\Assimp\include\assimp;$(SolutionDir)OpenGL\libraries\Includes;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)OpenGL\libraries\Assimp\lib;$(SolutionDir)OpenGL\Libraries\Libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <IncludePath>$(SolutionDir)OpenGL\libraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)OpenGL\Libraries\Libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)\OpenGL\libraries\Includes;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
@@ -83,9 +83,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)/OpenGL/libraries/Includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)/OpenGL/libraries/lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,14 +136,62 @@
     <ClCompile Include="stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\bin\shaders\fragment\fragModel.fs" />
     <None Include="..\bin\shaders\fragment\lamp_frag4.fs" />
     <None Include="..\bin\shaders\vertex\lamp_vert3.vs" />
+    <None Include="..\bin\shaders\vertex\vertModel.vs" />
+    <None Include="..\OpenGL\libraries\Includes\assimp\color4.inl" />
+    <None Include="..\OpenGL\libraries\Includes\assimp\material.inl" />
+    <None Include="..\OpenGL\libraries\Includes\assimp\matrix3x3.inl" />
+    <None Include="..\OpenGL\libraries\Includes\assimp\matrix4x4.inl" />
+    <None Include="..\OpenGL\libraries\Includes\assimp\quaternion.inl" />
+    <None Include="..\OpenGL\libraries\Includes\assimp\vector2.inl" />
+    <None Include="..\OpenGL\libraries\Includes\assimp\vector3.inl" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\ai_assert.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\anim.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\camera.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\cexport.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\cfileio.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\cimport.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\color4.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\config.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\DefaultIOStream.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\Defines.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\defs.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\Exporter.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\Importer.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\importerdesc.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\IOStream.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\IOSystem.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\light.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\Logger.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\LogStream.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\material.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\matrix3x3.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\matrix4x4.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\mesh.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\metadata.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\NullLogger.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\postprocess.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\quaternion.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\scene.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\SceneCombiner.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\texture.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\types.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\vector2.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\vector3.h" />
+    <ClInclude Include="..\OpenGL\libraries\Includes\assimp\version.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputStarter.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="model.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="shaders.h" />
     <ClInclude Include="stb_image.h" />
