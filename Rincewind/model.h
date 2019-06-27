@@ -158,25 +158,54 @@ private:
 
 
 		// 1. diffuse maps
-		vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse",scene);
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 		// 2. specular maps
-		vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", scene);
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		// 3. normal maps
-		std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal", scene);
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		// 4. height maps
-		std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+		std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", scene);
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
 		// return a mesh object created from the extracted mesh data
 		return Mesh(vertices, indices, textures);
 	}
-
+	string determineTextureType(const aiScene * scene, aiMaterial * mat)
+	{
+		aiString textypeStr;
+		mat->GetTexture(aiTextureType_DIFFUSE, 0, &textypeStr);
+		string textypeteststr = textypeStr.C_Str();
+		if (textypeteststr == "*0" || textypeteststr == "*1" || textypeteststr == "*2" || textypeteststr == "*3" || textypeteststr == "*4" || textypeteststr == "*5")
+		{
+			if (scene->mTextures[0]->mHeight == 0)
+			{
+				return "embedded compressed texture";
+			}
+			else
+			{
+				return "embedded non-compressed texture";
+			}
+		}
+		if (textypeteststr.find('.') != string::npos)
+		{
+			return "textures are on disk";
+		}
+	}
+	int getTextureIndex(aiString * str)
+	{
+		string tistr;
+		tistr = str->C_Str();
+		tistr = tistr.substr(1);
+		return stoi(tistr);
+	}
+	
+	string textype;
 	// checks all material textures of a given type and loads the textures if they're not loaded yet.
 	// the required info is returned as a Texture struct.
-	vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
+	vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName, const aiScene *scene)
 	{
 		vector<Texture> textures;
 		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -192,12 +221,47 @@ private:
 
 				auto a = atoi(&str.data[1]);
 				std::cout << " atoi returned " << a << " data[1] == " << str.data[1] << std::endl;
-			
 
-				mat->Get(AI_MATKEY_TEXTURE(type, i), str.data[1]);
+				aiTexture* texture = scene->mTextures[atoi(&str.data[1])];
+				auto z = texture->pcData;
 
+				std::cout << " pcdata->a == " << z << std::endl;
+
+				if (textype.empty()) textype = determineTextureType(scene, mat);
+
+
+				if (textype == "embedded compressed texture")
+				{
+					unsigned int textureID;
+					glGenTextures(1, &textureID);
+					int textureindex = getTextureIndex(&str);
+					aiScene a;
+					auto b = a.GetEmbeddedTexture(str.C_Str());
+					//texture->pcData.
+					int width, height, components_per_pixel;
+					unsigned char *image_data = stbi_load_from_memory(reinterpret_cast<unsigned char*>(texture->pcData), texture->mWidth, &width, &height, &components_per_pixel, 0);
+					GLenum format;
+					if (components_per_pixel == 1)
+						format = GL_RED;
+					else if (components_per_pixel == 3)
+						format = GL_RGB;
+					else if (components_per_pixel == 4)
+						format = GL_RGBA;
+
+					glBindTexture(GL_TEXTURE_2D, textureID);
+					glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image_data);
+					glGenerateMipmap(GL_TEXTURE_2D);
+
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+					stbi_image_free(image_data);
+				}
 			}
-			else {
+			else 
+			{
 				// check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
 				bool skip = false;
 				for (unsigned int j = 0; j < textures_loaded.size(); j++)
@@ -264,4 +328,6 @@ unsigned int TextureFromFile(const char *path, const string &directory, bool gam
 
 	return textureID;
 }
+
+
 #endif

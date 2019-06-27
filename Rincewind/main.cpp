@@ -89,7 +89,7 @@ int main() {
 
 	// load models
 	// -----------
-	Model ourModel("../bin/models/soulspear.obj");
+	Model ourModel("../bin/models/scene.fbx");
 	Shader ourShader("../bin/shaders/vertex/vertModel.vs", "../bin/shaders/fragment/fragModel.fs");
 	// shader configuration
 	// --------------------
