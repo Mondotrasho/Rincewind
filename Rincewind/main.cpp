@@ -40,7 +40,7 @@ float lastFrame = 0.0f;
 
 // lighting
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
-
+float shininess = 200.0f;
 int main() {	
 
 	//tell GLFW what version of OpenGL we are using
@@ -209,7 +209,7 @@ int main() {
 		// be sure to activate shader when setting uniforms/drawing objects
 		lightingShader.use();
 		lightingShader.setVec3("viewPos", cameraPos);
-		lightingShader.setFloat("material.shininess", 200.0f);
+		lightingShader.setFloat("material.shininess", shininess);
 
 		/*
 				  Here we set all the uniforms for the 5/6 types of lights we have. We have to set them manually and index
@@ -223,7 +223,7 @@ int main() {
 		lightingShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
 		lightingShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
 		// point light 1
-		lightingShader.setVec3("pointLights[0].position", pointLightPositions[0]);
+		lightingShader.setVec3("pointLights[0].position", lightPos);
 		lightingShader.setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
 		lightingShader.setVec3("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
 		lightingShader.setVec3("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
@@ -231,7 +231,7 @@ int main() {
 		lightingShader.setFloat("pointLights[0].linear", 0.09);
 		lightingShader.setFloat("pointLights[0].quadratic", 0.032);
 		// point light 2
-		lightingShader.setVec3("pointLights[1].position", pointLightPositions[1]);
+		lightingShader.setVec3("pointLights[1].position", lightPos);
 		lightingShader.setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
 		lightingShader.setVec3("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
 		lightingShader.setVec3("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
@@ -239,7 +239,7 @@ int main() {
 		lightingShader.setFloat("pointLights[1].linear", 0.09);
 		lightingShader.setFloat("pointLights[1].quadratic", 0.032);
 		// point light 3
-		lightingShader.setVec3("pointLights[2].position", pointLightPositions[2]);
+		lightingShader.setVec3("pointLights[2].position", lightPos);
 		lightingShader.setVec3("pointLights[2].ambient", 0.05f, 0.05f, 0.05f);
 		lightingShader.setVec3("pointLights[2].diffuse", 0.8f, 0.8f, 0.8f);
 		lightingShader.setVec3("pointLights[2].specular", 1.0f, 1.0f, 1.0f);
@@ -312,17 +312,20 @@ int main() {
 }
 
 float delay = 0.1f;
-
+bool shift = false;
 //this is out input
 void processInput(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 	float cameraSpeed;
-	if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)		
-		cameraSpeed = 5.0f * deltaTime; 
-	else
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
+		cameraSpeed = 5.0f * deltaTime;
+	shift = true;
+}
+	else{
 		cameraSpeed = 2.5f * deltaTime;
+	shift = false;}
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		cameraPos += cameraSpeed * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -357,6 +360,8 @@ void processInput(GLFWwindow *window)
 		cameraPos.y -= cameraSpeed* 8 * deltaTime;
 	}
 	
+	
+
 
 	//toggle polygonmode between wire frame and filled
 	if (glfwGetKey(window, GLFW_KEY_TAB) == GLFW_PRESS && delay <= 0)
@@ -419,12 +424,25 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	if (fov >= 1.0f && fov <= 45.0f)
-		fov -= yoffset;
-	if (fov <= 1.0f)
-		fov = 1.0f;
-	if (fov >= 45.0f)
-		fov = 45.0f;
+	if (shift) {
+		if (fov >= 1.0f && fov <= 45.0f)
+			fov -= yoffset;
+		if (fov <= 1.0f)
+			fov = 1.0f;
+		if (fov >= 45.0f)
+			fov = 45.0f;
+	}
+	else
+	{
+		float speed = 10;
+		if (shininess >= 1.0f && fov <= 300.0f)
+			shininess -= yoffset * speed;
+		if (shininess <= 1.0f)
+			shininess = 1.0f;
+		if (shininess >= 300.0f)
+			shininess = 300.0f;
+		std::cout << shininess << std::endl;
+	}
 }
 
 void initialize(unsigned i, Vertex* vertex, unsigned i1, unsigned* indices)
