@@ -2,6 +2,7 @@
 struct Material {
     sampler2D diffuse;
     sampler2D specular;
+	sampler2D normalmap;
     float shininess;
 }; 
   
@@ -76,6 +77,8 @@ uniform vec3 viewPos;
 void main()
 {
 // properties
+	//todo fix
+    //vec3 normal = texture(material.normalMap, TexCoords).rgb;
     vec3 norm = normalize(Normal);
     vec3 viewDir = normalize(viewPos - FragPos);
 

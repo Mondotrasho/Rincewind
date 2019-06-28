@@ -41,6 +41,7 @@ float lastFrame = 0.0f;
 // lighting
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 float shininess = 200.0f;
+bool lighton = false;
 int main() {	
 
 	//tell GLFW what version of OpenGL we are using
@@ -194,6 +195,7 @@ int main() {
 	lightingShader.use();
 	lightingShader.setInt("material.diffuse", 0);
 	lightingShader.setInt("material.specular", 1);
+	lightingShader.setInt("material.normalmap", 3);
 
 	while (!glfwWindowShouldClose(window))
 	{// update delta time
@@ -257,7 +259,15 @@ int main() {
 
 		// spotLight
 		lightingShader.setVec3("spotLight.position", cameraPos);
+		if(lighton){
 		lightingShader.setVec3("spotLight.direction", cameraFront);
+		}
+		else
+		{
+			
+		
+		lightingShader.setVec3("spotLight.direction", -cameraFront);
+		}
 		lightingShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
 		lightingShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
 		lightingShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
@@ -357,9 +367,17 @@ void processInput(GLFWwindow *window)
 	//toggle polygonmode between wire frame and filled
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS && delay <= 0)
 	{
-		cameraPos.y -= cameraSpeed* 8 * deltaTime;
+		cameraPos.y -= cameraSpeed * 8 * deltaTime;
 	}
-	
+
+
+	//toggle light on and off
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && delay <= 0)
+	{
+		lighton = !lighton;
+		delay = 0.1f;
+	}
+
 	
 
 
